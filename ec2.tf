@@ -141,7 +141,7 @@ resource "aws_imagebuilder_image_recipe" "main" {
   parent_image      = var.imgrep_parent_img
   description       = var.imgrep_description
   working_directory = var.imgrep_working_dir
-  user_data_base64  = base64encode(var.imgrep_user_data)
+  user_data_base64  = var.imgrep_user_data != null ? base64encode(var.imgrep_user_data) : null
   tags              = var.imgrep_tags
 
   dynamic "component" {
