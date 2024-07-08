@@ -12,7 +12,7 @@ resource "aws_iam_role" "main" {
   path  = "/"
 
   assume_role_policy  = file("${path.module}/policies/iam/iam_assume_role.json")
-  managed_policy_arns = var.imgb_managed_policies
+  managed_policy_arns = local.all_managed_policies
 }
 
 # Additional S3logs policy if logging is needed
