@@ -23,6 +23,13 @@ resource "aws_imagebuilder_image_pipeline" "main" {
     image_tests_enabled = var.imgpipe_tests_enabled
     timeout_minutes     = var.imgpipe_timeout_mins
   }
+
+# Replace the pipeline if the recipte changes due to dependencies. AWS will not allow modifying recipie without replacing pipeline
+  lifecycle {
+    replace_triggered_by = [
+      aws_imagebuilder_image_recipe.main
+    ]
+  }
 }
 
 # Conditional image creation at TF runtime
